@@ -1,5 +1,3 @@
-# routes/todo.py
-
 """
 This module defines the API routes for all Todo-related operations.
 
@@ -13,8 +11,6 @@ import database  # Absolute import from the project root (backend folder)
 from models import Todo, TodoUpdate  # Absolute import from the project root
 
 # Create a new APIRouter instance
-# prefix="/todos": All routes in this file will be prepended with /todos
-# tags=["Todos"]: All routes will be grouped under "Todos" in the Swagger docs
 router = APIRouter(
     prefix="/todos",
     tags=["Todos"]
@@ -23,10 +19,11 @@ router = APIRouter(
 # --- Todo Endpoints ---
 
 @router.post(
-    "/",  # The path is now "/" because of the prefix
+    "/",
     response_description="Add a new todo",
     response_model=Todo,
-    status_code=status.HTTP_201_CREATED
+    status_code=status.HTTP_201_CREATED,
+    response_model_by_alias=False 
 )
 async def create_todo(todo: Todo = Body(...)):
     """
@@ -38,9 +35,10 @@ async def create_todo(todo: Todo = Body(...)):
 
 
 @router.get(
-    "/",  # The path is now "/" because of the prefix
+    "/",
     response_description="List all todos",
-    response_model=List[Todo]
+    response_model=List[Todo],
+    response_model_by_alias=False 
 )
 async def list_todos():
     """
@@ -51,9 +49,10 @@ async def list_todos():
 
 
 @router.get(
-    "/{id}",  # The path is now just "/{id}"
+    "/{id}",
     response_description="Get a single todo by its ID",
-    response_model=Todo
+    response_model=Todo,
+    response_model_by_alias=False  
 )
 async def get_todo(id: str):
     """
@@ -71,7 +70,8 @@ async def get_todo(id: str):
 @router.put(
     "/{id}",
     response_description="Update an existing todo",
-    response_model=Todo
+    response_model=Todo,
+    response_model_by_alias=False  
 )
 async def update_todo_data(id: str, req: TodoUpdate = Body(...)):
     """
