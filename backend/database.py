@@ -24,7 +24,7 @@ from dotenv import load_dotenv
 # For production, this should be loaded from an environment variable (.env file), not hardcoded.
 load_dotenv() 
 
-MONGO_DETAILS = os.getenv("MONGO_URL")
+MONGO_DETAILS = os.getenv("MONGODB_URL")
 
 # Create an asynchronous client to connect to MongoDB.
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
